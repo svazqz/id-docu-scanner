@@ -1,48 +1,31 @@
-# Project Name
+# ![ID Document Scanner](docs/readme/banner.svg)
 
-## Overview
+A browser app with a camera view and video analysis for document capture. Use sample documents when developing and testing the capture flow.
 
-Briefly describe the purpose and functionality of your project. Include key features and goals.
+[Quick start](#quick-start) · [Validation](#validation) · [Project layout](#project-layout)
 
-## Table of Contents
+## Quick start
 
-- [Installation](#installation)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
-
-## Installation
-
-Provide instructions on how to install and set up the project. Include any dependencies or prerequisites.
-
-```bash
-# Clone the repository
-git clone https://github.com/albvazq/id-docu-scanner
-
-# Navigate to the project directory
-cd id-docu-scanner
-
-# Install dependencies
-pnpm install
+```sh
+npm ci
+npm start
 ```
 
-## Usage
+Open the local URL printed by Nx and allow camera access when exercising the capture flow.
 
-Explain how to use the project. Include examples and provide any necessary configuration details.
+## Validation
 
-```bash
-# Run the project
-pnpm exec nx run id-scanner:serve --configuration=development
+```sh
+npm test
+npm run build
 ```
 
-## Contributing
+Use a simulated camera feed or sample images for repeatable checks.
 
-Provide information on how others can contribute to your project. Include guidelines for submitting issues and pull requests.
+## Project layout
 
-## License
-
-Specify the license under which your project is distributed. For example, [MIT License](https://opensource.org/licenses/MIT).
-
----
-
-Customize the sections and content based on the specifics of your project. This README template provides a structured format to communicate essential information about your project to potential users and contributors.
+| Path | Purpose |
+| --- | --- |
+| [`src/app/`](src/app/) | Application UI and camera analysis |
+| [`e2e/`](e2e/) | Cypress end-to-end checks |
+| [`project.json`](project.json) | Nx targets |
