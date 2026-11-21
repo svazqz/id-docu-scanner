@@ -2,6 +2,8 @@
 
 A browser app with a camera view and video analysis for document capture. Use sample documents when developing and testing the capture flow.
 
+[![Validation](https://github.com/svazqz/id-docu-scanner/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/svazqz/id-docu-scanner/actions/workflows/ci.yml)
+
 [Quick start](#quick-start) · [Validation](#validation) · [Project layout](#project-layout)
 
 ## Quick start
