@@ -8,9 +8,11 @@ A browser app with a camera view and video analysis for document capture. Use sa
 
 ## Quick start
 
+Use pnpm 8 with the checked-in lockfile.
+
 ```sh
-npm ci
-npm start
+pnpm install --frozen-lockfile
+pnpm start
 ```
 
 Open the local URL printed by Nx and allow camera access when exercising the capture flow.
@@ -18,8 +20,8 @@ Open the local URL printed by Nx and allow camera access when exercising the cap
 ## Validation
 
 ```sh
-npm test
-npm run build
+pnpm test
+pnpm build
 ```
 
 Use a simulated camera feed or sample images for repeatable checks.

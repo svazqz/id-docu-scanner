@@ -25,10 +25,11 @@ jobs:
         with:
           node-version: "22"
           package-manager-cache: false
-          cache: "npm"
-      - name: "Install locked dependencies"
-        run: "npm ci"
+      - name: "Install pnpm 8 and locked dependencies"
+        run: |
+          npm install --global pnpm@8.15.9
+          pnpm install --frozen-lockfile
       - name: "Validate"
         run: |
-          npm test -- --watch=false
-          npm run build
+          pnpm exec nx test --watch=false
+          pnpm build
