@@ -1,15 +1,26 @@
-import { render } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import App from './app';
 
 describe('App', () => {
-  it('should render successfully', () => {
-    const { baseElement } = render(<App />);
-    expect(baseElement).toBeTruthy();
-  });
+  afterEach(() => vi.unstubAllGlobals());
 
-  it('should have a greeting as the title', () => {
-    const { getByText } = render(<App />);
-    expect(getByText(/Welcome id-scanner/gi)).toBeTruthy();
+  it('requests the rear camera and attaches its stream to the preview', async () => {
+    const stream = {};
+    const getUserMedia = vi.fn().mockResolvedValue(stream);
+    vi.stubGlobal('navigator', {
+      userAgent: navigator.userAgent,
+      mediaDevices: { getUserMedia },
+    });
+
+    const { container } = render(<App />);
+    const preview = container.querySelector('video');
+
+    expect(preview).not.toBeNull();
+    expect(getUserMedia).toHaveBeenCalledWith({
+      video: expect.objectContaining({ facingMode: 'environment' }),
+    });
+    await waitFor(() => expect(preview?.srcObject).toBe(stream));
   });
 });
