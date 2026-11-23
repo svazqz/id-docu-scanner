@@ -9,12 +9,10 @@ export type VideoAnalyzerBuilder = (
 export class VideoAnalyzerEngine {
   private video: HTMLVideoElement | null = null;
   private overlay: HTMLDivElement | null = null;
-  private isFirst = true;
   private _analyzers: ((v: HTMLVideoElement | null) => Promise<void> | void)[] =
     [];
   private stopped = false;
   private isProcessing = false;
-  private registeredAnalyzers = new Set();
 
   constructor(v: HTMLVideoElement | null, o: HTMLDivElement | null) {
     if (v !== null && o !== null) {
@@ -28,34 +26,33 @@ export class VideoAnalyzerEngine {
 
   set analyzers(analyzers: VideoAnalyzerBuilder[]) {
     if (this.video) {
-      console.info(this.video, this.overlay);
       this._analyzers = analyzers.map((a) => a(this.video, this.overlay));
       this.runAllAnalyzers();
     }
   }
 
   async runAllAnalyzers() {
-    if (this._analyzers.length > 0 && !this.isProcessing) {
-      const video: HTMLVideoElement | null = document.getElementById(
-        'inputVideo'
-      ) as unknown as HTMLVideoElement | null;
-      this.isProcessing = true;
+    if (this.stopped || this._analyzers.length === 0 || this.isProcessing) return;
+
+    this.isProcessing = true;
+    try {
       for (const analyzer of this._analyzers) {
-        await analyzer(video);
+        await analyzer(this.video);
+        if (this.stopped) return;
       }
+    } finally {
       this.isProcessing = false;
-      requestAnimationFrame(() => {
-        this.runAllAnalyzers();
-      });
     }
+    requestAnimationFrame(() => {
+      void this.runAllAnalyzers();
+    });
   }
 
   stop() {
-    requestAnimationFrame(() => {
-      this.stopped = true;
-      document.getElementById('inputVideo')?.remove();
-    });
+    this.stopped = true;
+    if (this.video) this.video.onplay = null;
   }
+
 }
 
 const isMobile =

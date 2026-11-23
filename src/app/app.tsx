@@ -18,7 +18,7 @@ declare global {
   }
 }
 
-function DocumentAnalyzer(
+export function DocumentAnalyzer(
   video: HTMLVideoElement | null,
   o?: HTMLDivElement | null
 ) {
