@@ -32,7 +32,8 @@ export function Script({
 
       return () => {
         // Cleanup: Remove the script element if the component unmounts
-        document.body.removeChild(script);
+        script.remove();
+        scriptsAdded.delete(src);
       };
     }
   }, []);
