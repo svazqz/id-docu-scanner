@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A browser-based document capture prototype with an interactive framing demo.">
+  <title>ID Document Scanner · Document capture in the browser</title>
+  <link rel="stylesheet" href="./style.css">
+  <script src="./demo.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header><div class="wrap mast"><a href="./" class="brand"><b aria-hidden="true">⌑</b> ID Document Scanner</a><nav aria-label="Main navigation"><a href="#demo">Try demo</a><a href="#capture">How capture works</a><a href="https://github.com/svazqz/id-docu-scanner">GitHub</a></nav></div></header>
+  <main class="wrap" id="main">
+    <section class="hero" id="demo">
+      <div class="intro">
+        <p class="eyebrow">Browser document capture</p>
+        <h1>Get the document<br><em>in frame.</em></h1>
+        <p class="lede">A camera capture prototype that uses document edges to give feedback while someone positions an ID. Try the framing controls with a sample card.</p>
+        <a class="button" href="#framing">Try the framing demo</a>
+      </div>
+      <section class="panel" id="framing" aria-label="Interactive framing demo">
+        <div class="panel-head"><strong>Framing demo</strong><span>Camera off</span></div>
+        <div class="camera">
+          <div class="guide" aria-hidden="true"></div>
+          <div class="card" aria-hidden="true">
+            <div class="card-top"><b>EXAMPLE ID</b><span>DEMO</span></div>
+            <div class="card-body"><div class="portrait"><i></i></div><div class="card-lines"><i></i><i></i><i></i></div></div>
+            <div class="card-foot">SYNTHETIC DOCUMENT</div>
+          </div>
+        </div>
+        <div class="controls">
+          <label>Horizontal position<input id="position" type="range" min="-42" max="42" value="25" step="1"></label>
+          <label>Card size<input id="size" type="range" min="32" max="86" value="56" step="1"></label>
+        </div>
+        <p id="feedback" class="feedback" role="status"></p>
+        <button type="button" id="reset">Reset sample</button>
+      </section>
+    </section>
+    <section id="capture" class="capture">
+      <div><p class="eyebrow">Capture workflow</p><h2>From camera frame to positioning feedback.</h2></div>
+      <div class="steps"><div><h3>Open the camera</h3><p>The prototype uses the browser’s camera permission to read video frames.</p></div><div><h3>Find the document edges</h3><p>OpenCV looks for the largest outline and checks its position and size.</p></div><div><h3>Guide the user</h3><p>A green outline indicates that the document is centered and large enough in the frame.</p></div></div>
+    </section>
+  </main>
+  <footer class="wrap"><span>ID Document Scanner</span><a href="https://github.com/svazqz/id-docu-scanner#quick-start">Run the camera prototype locally</a></footer>
+</body>
+</html>
